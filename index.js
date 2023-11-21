@@ -13,12 +13,23 @@ const createCollection = require('./router/collection/createCollection');
 const deleteCollection = require('./router/collection/deleteCollection');
 
 //Customer
-const getCustomer = require('./router/customer/getCustomer');
-const createCustomer = require('./router/customer/createCustomer');
+const getCustomer = require('./router/customer/getApi/getCustomer');
+const getSpecificCustomer = require('./router/customer/getApi/getSpecifcCustomer');
+const getCustomerOrder = require('./router/customer/getApi/getCustomerOrder');
+const searchCustomerAccEmail = require('./router/customer/getApi/searchCustomerAccEmail');
+const searchCustomerAccLastName = require('./router/customer/getApi/searchCustomerAccLastName');
+const searchCustomerAccCountry = require('./router/customer/getApi/searchCountryAccCountry');
+
+const createCustomer = require('./router/customer/postApi/createCustomer');
+const sendInviteEmail = require('./router/customer/postApi/sendInviteEmail');
+const sendInvite = require('./router/customer/postApi/sendInvite');
+
 const updateCustomer = require('./router/customer/updateCustomer');
 const deleteCustomer = require('./router/customer/deleteCustomer');
 
-const getOrder = require('./router/order/getOrder');
+
+//Order Api
+const getOrder = require('./router/order/getApi/getOrder');
 
 //Product
 const getProduct = require('./router/product/getProduct');
@@ -52,10 +63,22 @@ app.use('/api',deleteCollection);
 
 //Customer Api
 app.use('/api',getCustomer);
+app.use('/api',getSpecificCustomer);
+app.use('/api',getCustomerOrder);
+app.use('/api',searchCustomerAccEmail);
+app.use('/api',searchCustomerAccLastName);
+app.use('/api',searchCustomerAccCountry);
+
 app.use('/api',createCustomer);
+app.use('/api',sendInviteEmail);
+app.use('/api',sendInvite);
+
 app.use('/api',updateCustomer);
 app.use('/api',deleteCustomer);
 
+
+
+//Order Api
 app.use('/api',getOrder);
 
 //Product api

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.post('/createCustomer',async (req,resp) => {
+router.post('/sendInviteEmail',async (req,resp) => {
     try{
         const shopifyStore = new shopify({
             shopName: process.env.SHOPNAME,
@@ -10,20 +10,21 @@ router.post('/createCustomer',async (req,resp) => {
             apiVersion: process.env.APIVERSION
         });
 
-        const {first_name, last_name, email, phone} = req.body; 
+        const {first_name, last_name, email} = req.body; 
 
-        const newCustomer = {
+        let newCustomer = {
             first_name,
             last_name,
             email,
-            phone,
+            verified_email:true,
+            send_email_invite :true
         }
 
-        const createCustomer = shopifyStore.customer.create(newCustomer);
+        const sendInviteEmail = await shopifyStore.customer.create(newCustomer);
 
-
-        return resp.send({ message: 'Customer added successfully'});
+        return resp.send({ message: 'Customer added successfully', sendInviteEmail: sendInviteEmail});
     } catch(error) {
+        console.log(error);
         return resp.status(500).send({ message: 'Internal Server Error' });
     }
 })
