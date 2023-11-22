@@ -32,8 +32,27 @@ const deleteCustomer = require('./router/customer/deleteCustomer');
 const getOrder = require('./router/order/getApi/getOrder');
 
 //Product
-const getProduct = require('./router/product/getProduct');
-const createProduct = require('./router/product/createProduct');
+const productList = require('./router/product/getApi/list/productList');
+const afterSpecificId = require('./router/product/getApi/list/afterSpecificId');
+const specificProductList = require('./router/product/getApi/list/specificProductList');
+const productBelongsToCollection = require('./router/product/getApi/list/productBelongsToCollection');
+const presentmentCurrencies = require('./router/product/getApi/list/productWithPresentmentCurrencies');
+const withSomeAttr = require('./router/product/getApi/list/withSomeAttr');
+const singalProduct = require('./router/product/getApi/get/singalProduct');
+const particularField = require('./router/product/getApi/get/particularFields');
+const allProductCount = require('./router/product/getApi/count/allProduct');
+const collectionProductCount = require('./router/product/getApi/count/collectionProduct');
+
+const createProduct = require('./router/product/postApi/createDraftProduct');
+const withMultipleVariants = require('./router/product/postApi/withMultipleVariants');
+const withMultipleOptions = require('./router/product/postApi/withMultipleOptions');
+const withProductTag = require('./router/product/postApi/withProductTag');
+const withProductImages = require('./router/product/postApi/withImages');
+const createUnpublishProduct = require('./router/product/postApi/unpublishProduct');
+const withMetaField = require('./router/product/postApi/withMetafield');
+const withSeoTitleAndDescription = require('./router/product/postApi/withSeoTitleAndDescription');
+const withoutTitleRetunError = require('./router/product/postApi/withoutTitle');
+
 const deleteProduct = require('./router/product/deleteProduct');
 const updateProduct = require('./router/product/updateProduct');
 
@@ -82,11 +101,31 @@ app.use('/api',deleteCustomer);
 app.use('/api',getOrder);
 
 //Product api
-app.use('/api',getProduct);
+app.use('/api',productList);
+app.use('/api',afterSpecificId);
+app.use('/api',specificProductList);
+app.use('/api',productBelongsToCollection);
+app.use('/api',presentmentCurrencies);
+app.use('/api',withSomeAttr);
+app.use('/api',singalProduct);
+app.use('/api',particularField);
+app.use('/api',allProductCount);
+app.use('/api',collectionProductCount);
+
 app.use('/api',createProduct);
+app.use('/api',withMultipleVariants);
+app.use('/api',withMultipleOptions);
+app.use('/api',withProductTag);
+app.use('/api',withProductImages);
+app.use('/api',createUnpublishProduct);
+app.use('/api',withMetaField);
+app.use('/api',withSeoTitleAndDescription);
+app.use('/api',withoutTitleRetunError);
+
 app.use('/api',deleteProduct);
 app.use('/api',updateProduct);
 app.use('/api',updateProduct);
+
 
 //discount api
 app.use('/api',getDiscontCodeList);

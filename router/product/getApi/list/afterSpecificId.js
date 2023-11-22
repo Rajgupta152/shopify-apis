@@ -3,7 +3,7 @@ const router = express.Router();
 const shopify = require("shopify-api-node");
 require("dotenv").config();
 
-router.get('/product',async (req,resp) => {
+router.get('/product-after-specific-id',async (req,resp) => {
     try{
         const shopifyStore = new shopify({
             shopName: process.env.SHOPNAME,
@@ -11,9 +11,9 @@ router.get('/product',async (req,resp) => {
             apiVersion: process.env.APIVERSION
         });
 
-        let getProduct = await shopifyStore.product.list();
+        let getProduct = await shopifyStore.product.list({since_id : "8743631061284"});
 
-        return resp.send({ message: 'Products retrieved successfully', product: getProduct });
+        return resp.status(200).send({status:'Success', message: 'Products retrieved successfully', product: getProduct });
     } catch(error) {
         console.log(error);
         return resp.status(500).send({ message: 'Internal Server Error' });
