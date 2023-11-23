@@ -12,10 +12,11 @@ router.delete('/deleteProduct/:id',async (req,resp) => {
         });
 
         const deleteProduct = await shopifyStore.product.delete(productId);
-        return resp.send({ message: 'Products Deleted', product: deleteProduct });
+        return resp.status(200).send({ status: "Success", message: 'Products Deleted', product: deleteProduct });
     } catch(error) {
-        // return resp.status(500).send({ message: 'Internal Server Error' });
         console.log(error)
+        return resp.status(500).send({ message: 'Internal Server Error' });
+       
     }
 })
 
