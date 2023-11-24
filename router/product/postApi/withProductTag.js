@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.post('/withProductTag',async (req,resp) => {
+router.post('/createProductWithTag',async (req,resp) => {
     const{title, body_html, vendor, product_type, tags} = req.body;
     
     try{

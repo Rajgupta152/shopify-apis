@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.put('/updateImage/:id',async (req,resp) => {
+router.put('/updateProductImage/:id',async (req,resp) => {
     const productId = req.params.id;
     const {images} = req.body;
     try{

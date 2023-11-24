@@ -4,7 +4,7 @@ const shopify = require("shopify-api-node");
 
 router.put('/updateProductVariant/:id',async (req,resp) => {
     const productId = req.params.id;
-    const {variants} = req.body;
+    const {title,variants} = req.body;
     try{
         const shopifyStore = new shopify({
             shopName: process.env.SHOPNAME,
@@ -15,6 +15,7 @@ router.put('/updateProductVariant/:id',async (req,resp) => {
         // const existingProduct = await shopifyStore.product.get(productId);
 
         const product = {
+            title,
             variants  
         }
 

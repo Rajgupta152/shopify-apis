@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.put('/updateStatus/:id',async (req,resp) => {
+router.put('/updateProductStatus/:id',async (req,resp) => {
     const productId = req.params.id;
     const {status} = req.body;
     try{

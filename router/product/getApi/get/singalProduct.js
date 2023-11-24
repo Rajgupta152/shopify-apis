@@ -3,8 +3,8 @@ const router = express.Router();
 const shopify = require("shopify-api-node");
 require("dotenv").config();
 
-router.get('/singalProduct',async (req,resp) => {
-    const id = req.body.id;
+router.get('/singalProduct/:id',async (req,resp) => {
+    const id = req.params.id;
     if(!id){
         return resp.status(400).send({ status:'error', message: 'id Not Found' })
     }

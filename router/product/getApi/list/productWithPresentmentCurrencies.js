@@ -5,7 +5,7 @@ require("dotenv").config();
 
 //Not Working
 
-router.get('/product-with-presentment-currencies',async (req,resp) => {
+router.get('/productWithPresentmentCurrencies',async (req,resp) => {
     // presentmentCurrencies = req.body.presentment_currencies
     try{
         const shopifyStore = new shopify({

@@ -3,8 +3,8 @@ const router = express.Router();
 const shopify = require("shopify-api-node");
 require("dotenv").config();
 
-router.get('/collectionProductCount',async (req,res) => {
-    const { collection_id } = req.body;
+router.get('/collectionProductCount/:id',async (req,res) => {
+    const collection_id = req.params.id;
     if (!collection_id) {
         return res.status(400).send({ status:'error', message: 'collection_id Not Found' });  
     }

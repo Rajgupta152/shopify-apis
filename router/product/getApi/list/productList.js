@@ -3,7 +3,7 @@ const router = express.Router();
 const shopify = require("shopify-api-node");
 require("dotenv").config();
 
-router.get('/product-list',async (req,resp) => {
+router.get('/productList',async (req,resp) => {
     try{
         const shopifyStore = new shopify({
             shopName: process.env.SHOPNAME,

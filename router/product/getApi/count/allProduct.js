@@ -13,7 +13,7 @@ router.get('/allProductCount',async (req,resp) => {
 
         let getProduct = await shopifyStore.product.count();
 
-        return resp.status(200).send({statue: 'success', message: 'Products count retrieved successfully', productCount: getProduct });
+        return resp.status(200).send({status: 'success', message: 'Products count retrieved successfully', productCount: getProduct });
     } catch(error) {
         console.log(error);
         return resp.status(500).send({ message: 'Internal Server Error' });

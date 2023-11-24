@@ -3,7 +3,8 @@ const router = express.Router();
 const shopify = require("shopify-api-node");
 require("dotenv").config();
 
-router.get('/specific-product-list',async (req,resp) => {
+router.get('/specificProductsList',async (req,resp) => {
+    const{ids} = req.body;
     try{
         const shopifyStore = new shopify({
             shopName: process.env.SHOPNAME,
@@ -11,7 +12,8 @@ router.get('/specific-product-list',async (req,resp) => {
             apiVersion: process.env.APIVERSION
         });
 
-        let getProduct = await shopifyStore.product.list({ids : "8743631061284, 8743321469220"});
+
+        const getProduct = await shopifyStore.product.list({ids : ids});
 
         return resp.status(200).send({status: 'Success', message: 'Specific products retrieved successfully', product: getProduct });
     } catch(error) {

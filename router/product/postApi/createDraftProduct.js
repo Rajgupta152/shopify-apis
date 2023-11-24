@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.post('/createProduct',async (req,resp) => {
-    const{title, price, images} = req.body;
+router.post('/createDraftProduct',async (req,resp) => {
+    const{title,body_html,vendor,product_type,status} = req.body;
     try{
         const shopifyStore = new shopify({
             shopName: process.env.SHOPNAME,
@@ -12,8 +12,10 @@ router.post('/createProduct',async (req,resp) => {
         });
         const newproduct = {
             title,
-            price,
-            images
+            body_html,
+            vendor,
+            product_type,
+            status  
         }
 
         const addProduct = await shopifyStore.product.create(newproduct)

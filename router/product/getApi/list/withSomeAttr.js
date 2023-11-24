@@ -3,7 +3,8 @@ const router = express.Router();
 const shopify = require("shopify-api-node");
 require("dotenv").config();
 
-router.get('/withSomeAttr',async (req,resp) => {
+router.get('/productsWithSomeAttr',async (req,resp) => {
+    const {fields} = req.body;
     try{
         const shopifyStore = new shopify({
             shopName: process.env.SHOPNAME,
@@ -11,7 +12,7 @@ router.get('/withSomeAttr',async (req,resp) => {
             apiVersion: process.env.APIVERSION
         });
 
-        let getProduct = await shopifyStore.product.list({fields: "id, images, title"});
+        let getProduct = await shopifyStore.product.list({fields: fields});
 
         return resp.status(200).send({status: 'Success', message: 'products with some attr', product: getProduct });
     } catch(error) {

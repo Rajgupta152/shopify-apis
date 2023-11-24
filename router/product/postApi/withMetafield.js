@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.post('/withMetaField',async (req,resp) => {
+router.post('/createProductwithMetaField',async (req,resp) => {
     const{title, body_html, vendor, product_type, metafields} = req.body;
     
     try{

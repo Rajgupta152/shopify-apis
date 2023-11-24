@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.put('/updateSeoAndDesc/:id',async (req,resp) => {
+router.put('/updateProductSeoAndDesc/:id',async (req,resp) => {
     const productId = req.params.id;
     const {metafields_global_title_tag, metafields_global_description_tag} = req.body;
     try{
