@@ -15,14 +15,23 @@ const deleteCollection = require('./router/collection/deleteCollection');
 //Customer get
 const getCustomer = require('./router/customer/getApi/getCustomer');
 const getSpecificCustomer = require('./router/customer/getApi/getSpecifcCustomer');
-const getCustomerOrder = require('./router/customer/getApi/getCustomerOrder');
+const getCustomerOrder = require('./router/customer/getApi/getCustomersOpenOrder');
 const searchCustomerAccEmail = require('./router/customer/getApi/searchCustomerAccEmail');
 const searchCustomerAccLastName = require('./router/customer/getApi/searchCustomerAccLastName');
-const searchCustomerAccCountry = require('./router/customer/getApi/searchCountryAccCountry');
+const searchCustomerAccCountry = require('./router/customer/getApi/searchCustomerAccCountry');
+const getCustomerAfterSpecificId = require('./router/customer/getApi/getCustomerAfterSpecificId');
+const getCustomerWithSpecificFields = require('./router/customer/getApi/getCustomerWithSpecificFields');
+const getSingalCustomer = require('./router/customer/getApi/getSingalCustomer');
+const getCustomersPreviousOrder = require('./router/customer/getApi/getCustomersPreviousOrder');
+const getCustomerCount = require('./router/customer/getApi/getCountOfAllCustomer');
+const getCountOfCustomerChangedAfterSpecificDate = require('./router/customer/getApi/getCountOfCustomerChangedAfterSpecificDate');
+const getCountOfCustomerCreatedAfterSpecificDate = require('./router/customer/getApi/getCountOfCustomerCreatedAfterSpecificData');
+const searchCustomerWithTagsAndSpecificFields = require('./router/customer/getApi/searchCustomerWithTagsAndSpecificFields');
+const searchCustomerWithVerifiedEmail = require('./router/customer/getApi/searchCustomerWithVerifiedEmail');
 
 //Customer create
-const createCustomer = require('./router/customer/postApi/createCustomer');
-const sendInviteEmail = require('./router/customer/postApi/sendInviteEmail');
+const createCustomer = require('./router/customer/postApi/createCustomerWithPassword');
+const sendInviteEmail = require('./router/customer/postApi/createCustomerWithSendInviteEmail');
 const sendInvite = require('./router/customer/postApi/sendInvite');
 
 //Customer update
@@ -106,6 +115,15 @@ app.use('/api',getCustomerOrder);
 app.use('/api',searchCustomerAccEmail);
 app.use('/api',searchCustomerAccLastName);
 app.use('/api',searchCustomerAccCountry);
+app.use('/api',getCustomerAfterSpecificId);
+app.use('/api',getCustomerWithSpecificFields);
+app.use('/api',getSingalCustomer);
+app.use('/api',getCustomersPreviousOrder);
+app.use('/api',getCustomerCount);
+app.use('/api',getCountOfCustomerChangedAfterSpecificDate);
+app.use('/api',getCountOfCustomerCreatedAfterSpecificDate);
+app.use('/api',searchCustomerWithTagsAndSpecificFields);
+app.use('/api',searchCustomerWithVerifiedEmail);
 
 //Customer create api
 app.use('/api',createCustomer);

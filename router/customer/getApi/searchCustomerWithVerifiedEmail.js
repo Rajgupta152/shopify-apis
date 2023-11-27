@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.get('/searchCustomerWithLastNameAndSpecificFields',async (req,res) => {
-    const {last_name,fields} = req.body;
-    if(!last_name || !fields){
-      return res.status(400).send({ status:'error', message: 'last_name or fields Not Found' })
-  }
+router.get('/searchCustomerWithVerifiedEmail',async (req,res) => {
+    const {verified_email,fields} = req.body;
+    if(!verified_email || !fields){
+      return res.status(400).send({ status:'error', message: 'verified_email or fields Not Found' })
+    }
     try{
         const shopifyStore = new shopify({
             shopName: process.env.SHOPNAME,
@@ -15,13 +15,12 @@ router.get('/searchCustomerWithLastNameAndSpecificFields',async (req,res) => {
         });
 
       const obj = {
-        last_name,
+        verified_email,
         fields
       }
 
-        let getCustomerAccLastName = await shopifyStore.customer.search(obj)
-        
-        return res.send({ message: 'Customer retrieved successfully', customerOrder: getCustomerAccLastName});
+        let getCustomerAccTags = await shopifyStore.customer.search(obj)      
+        return res.status(200).send({status: 'Success', message: 'Customer retrieved successfully', customerOrder: getCustomerAccTags});
     } catch(error) {
         console.log(error);
         return res.status(500).send({ message: 'Internal Server Error' });

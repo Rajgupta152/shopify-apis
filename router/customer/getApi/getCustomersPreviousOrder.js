@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.get('/getSpecificCustomer',async (req,res) => {
-    const {ids} = req.body;
-    if(!ids){
-        return res.status(400).send({ status:'error', message: 'ids Not Found' })
+router.get('/getCustomersPreviousOrder',async (req,res) => {
+    const {id,status} = req.body
+    if(!id || !status){
+        return res.status(400).send({ status:'error', message: 'id or status Not Found' })
     }
     try{
         const shopifyStore = new shopify({
@@ -13,13 +13,13 @@ router.get('/getSpecificCustomer',async (req,res) => {
             accessToken: process.env.ACCESSTOKEN,
             apiVersion: process.env.APIVERSION
         });
+        
 
-        let getCustomer = await shopifyStore.customer.list({ids: ids});
+        let getCustomerOrder = await shopifyStore.customer.orders(id,status)
         
-        
-        return res.status(200).send({status: 'Sucess', message: 'Products retrieved successfully', customer: getCustomer });
+        return res.status(200).send({status: 'Success', message: 'Customer order retrieved successfully', customerOrder: getCustomerOrder });
     } catch(error) {
-        console.log(error)
+        console.log(error);
         return res.status(500).send({ message: 'Internal Server Error' });
     }
 })

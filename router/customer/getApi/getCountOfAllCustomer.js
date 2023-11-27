@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.get('/getAllCustomer',async (req,res) => {
+router.get('/getCountOfAllCustomer',async (req,res) => {
     try{
         const shopifyStore = new shopify({
             shopName: process.env.SHOPNAME,
@@ -10,11 +10,12 @@ router.get('/getAllCustomer',async (req,res) => {
             apiVersion: process.env.APIVERSION
         });
 
-        let getCustomer = await shopifyStore.customer.list();        
-
-        return res.send({ message: 'Customer retrieved successfully', customer: getCustomer });
+        let getCustomerCount = await shopifyStore.customer.count()
+        
+        return res.status(200).send({status: 'Success', message: 'Customer order retrieved successfully', customerCount: getCustomerCount});
     } catch(error) {
-        return res.status(500).send({ message: 'Internal Server Error' });
+        console.log(error);
+        return res.status(500).send({message: 'Internal Server Error'});
     }
 })
 
