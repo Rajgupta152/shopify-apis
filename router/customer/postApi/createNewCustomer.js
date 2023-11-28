@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.post('/createCustomerWithSendInviteEmail',async (req,res) => {
-    const {first_name, last_name, email, phone, verified_email, addresses, send_email_invite } = req.body; 
-    if(!first_name || !last_name || !email || !phone || !verified_email || !addresses || !send_email_invite){
+router.post('/createNewCustomer',async (req,res) => {
+    const {first_name, last_name, email, phone, verified_email, addresses } = req.body; 
+    if(!first_name || !last_name || !email || !phone || !verified_email || !addresses){
         
-        return res.status(422).send({ status:'error', message: 'Unprocessable Entity' })
+        return res.status(422).send({ status:'error', message: 'Unprocessable Entity'})
     }
     try{
         const shopifyStore = new shopify({
@@ -22,13 +22,12 @@ router.post('/createCustomerWithSendInviteEmail',async (req,res) => {
             email,
             phone,
             verified_email,
-            addresses,
-            send_email_invite
+            addresses, 
         }
 
-        const sendInviteEmail = await shopifyStore.customer.create(newCustomer);
+        const createCustomer = await shopifyStore.customer.create(newCustomer);
 
-        return res.status(200).send({status: "Success", message: 'Customer added successfully', sendInviteEmail: sendInviteEmail});
+        return res.status(200).send({status: "Success", message: 'Customer added successfully', createCustomer: createCustomer});
     } catch(error) {
         console.log(error);
         return res.status(500).send({ message: 'Internal Server Error' });

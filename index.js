@@ -32,17 +32,40 @@ const searchCustomerWithVerifiedEmail = require('./router/customer/getApi/search
 //Customer create
 const createCustomer = require('./router/customer/postApi/createCustomerWithPassword');
 const sendInviteEmail = require('./router/customer/postApi/createCustomerWithSendInviteEmail');
-const sendInvite = require('./router/customer/postApi/sendInvite');
+const createCustomerWithMetafield = require('./router/customer/postApi/createCustomerWithMetafield');
+const createNewCustomer = require('./router/customer/postApi/createNewCustomer');
+const createCustomerWithPhoneReturnError = require('./router/customer/postApi/createCustomerWithPhoneReturnError');
+const createCustomerWithEmailReturnError = require('./router/customer/postApi/createCustomerWithEmailReturnError');
+const createCustomerWithoutNameAndEmailReturnError = require('./router/customer/postApi/createCustomerWithouNameAndEmailReturnError')
+const createCustomerWithActivationUrl = require('./router/customer/postApi/createCustomerWithActivationUrl');
+const createCustomerWithActivationUrlReturnError = require('./router/customer/postApi/createCustomerWithActivationUrlReturnError');
+const sendInvite = require('./router/customer/postApi/sendDefaultInvite');
+const sendCustomizedInvite = require('./router/customer/postApi/sendCustomizeInvite')
 
 //Customer update
-const updateCustomer = require('./router/customer/updateCustomer');
+const addMetafield = require('./router/customer/updateApi/addMetafield');
+const updateCustomersMarketingOptInState = require('./router/customer/updateApi/updateCustomersMarketingOptInState');
+const updateCustomersTags = require('./router/customer/updateApi/updateCustomersTags');
+const updateCustomersDetails = require('./router/customer/updateApi/updateCustomersDetails');
+const updateCustomerThatNotExistRetunsError = require('./router/customer/updateApi/updateCustomerThatNotExist')
 
 //Customer delete
-const deleteCustomer = require('./router/customer/deleteCustomer');
+const deleteCustomer = require('./router/customer/deleteApi/deleteCustomer');
 
 
-//Order Api
-const getOrder = require('./router/order/getApi/getOrder');
+//Order get
+const getOrder = require('./router/order/getApi/getAllOrders');
+const getAllOrdersAfterSpecificId = require('./router/order/getApi/getAllOrderAfterSpecificId')
+const getAllOrdersWithCertaindFields = require('./router/order/getApi/getAllOrdersWithCertainFields');
+const getOrderLastUpdatedAfterSpecificDate = require('./router/order/getApi/getOrderLastUpdatedAfterSpecificDate');
+const getOrderThatHaveAuthorized = require('./router/order/getApi/getOrderThatHaveAuthorized');
+const getSpecificOrder = require('./router/order/getApi/getSpecificOrder');
+const getSpecificOrderWithCertainFields = require('./router/order/getApi/getSpecificOrderWithCertainFields');
+const getCountOfOrders = require('./router/order/getApi/getCountOfOrders');
+const getCountOfAuthorizedPaymentOrder = require('./router/order/getApi/getCountOfAuthorizedPaymentOrder');
+
+// Order create
+const createAnOrder = require('./router/order/postApi/createAnOrder')
 
 //Product get
 const productList = require('./router/product/getApi/list/productList');
@@ -128,18 +151,41 @@ app.use('/api',searchCustomerWithVerifiedEmail);
 //Customer create api
 app.use('/api',createCustomer);
 app.use('/api',sendInviteEmail);
+app.use('/api',createCustomerWithMetafield);
+app.use('/api',createNewCustomer);
+app.use('/api',createCustomerWithPhoneReturnError);
+app.use('/api',createCustomerWithEmailReturnError);
+app.use('/api',createCustomerWithoutNameAndEmailReturnError);
+app.use('/api',createCustomerWithActivationUrl);
+app.use('/api',createCustomerWithActivationUrlReturnError);
 app.use('/api',sendInvite);
+app.use('/api',sendCustomizedInvite);
 
 // Customer update api
-app.use('/api',updateCustomer);
+app.use('/api',addMetafield);
+app.use('/api',updateCustomersMarketingOptInState);
+app.use('/api',updateCustomersTags);
+app.use('/api',updateCustomersDetails);
+app.use('/api',updateCustomerThatNotExistRetunsError);
 
 //Customer delete api
 app.use('/api',deleteCustomer);
 
 
 
-//Order Api
+//Order get Api
 app.use('/api',getOrder);
+app.use('/api',getAllOrdersAfterSpecificId);
+app.use('/api',getAllOrdersWithCertaindFields);
+app.use('/api',getOrderLastUpdatedAfterSpecificDate);
+app.use('/api',getOrderThatHaveAuthorized);
+app.use('/api',getSpecificOrder);
+app.use('/api',getSpecificOrderWithCertainFields);
+app.use('/api',getCountOfOrders);
+app.use('/api',getCountOfAuthorizedPaymentOrder);
+
+//Order post Api
+app.use('/api',createAnOrder);
 
 //Product get api
 app.use('/api',productList);

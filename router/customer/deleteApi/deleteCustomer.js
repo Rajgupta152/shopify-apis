@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.delete('/deleteCustomer/:id',async (req,resp) => {
+router.delete('/deleteCustomer/:id',async (req,res) => {
     const id = req.params.id;
     try{
         const shopifyStore = new shopify({
@@ -11,12 +11,12 @@ router.delete('/deleteCustomer/:id',async (req,resp) => {
             apiVersion: process.env.APIVERSION
         });
 
-        const deletedCustomer = await shopifyStore.customer.delete(id);
+        await shopifyStore.customer.delete(id);
     
-        return resp.send({ message: 'Customer deleted successfully',deletedCustomer:deletedCustomer});
+        return res.status(200).send({ status: "Success", message: 'Customer deleted successfully'});
     } catch(error) {
-        console.log(error.message);
-        return resp.status(500).send({ message: 'Internal Server Error' });
+        console.log(error);
+        return res.status(500).send({ message: 'Internal Server Error' });
     }
 })
 
