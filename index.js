@@ -65,7 +65,42 @@ const getCountOfOrders = require('./router/order/getApi/getCountOfOrders');
 const getCountOfAuthorizedPaymentOrder = require('./router/order/getApi/getCountOfAuthorizedPaymentOrder');
 
 // Order create
-const createAnOrder = require('./router/order/postApi/createAnOrder')
+const createAnOrder = require('./router/order/postApi/createAComprehnsiveOrder');
+const createPartiallyPaidOrderWithNewCustomer = require('./router/order/postApi/createPartiallyPaidOrderWithNewCustomer');
+const createPendingOrderWithExistingCustomer = require('./router/order/postApi/createPendingOrderWithExistingCustomer');
+const createSimpleOrderWithFullfillment = require('./router/order/postApi/createSimpleOrderWithFullfillment');
+const createOrderWithOnlyVariantId = require('./router/order/postApi/createOrderWithOnlyVariantId');
+const createOrderWithoutOrderAndFullfillmentReciept = require('./router/order/postApi/createOrderWithoutOrderAndFullfillmentReciept')
+const createOrderWithOrderAndShipmentConfirmation = require('./router/order/postApi/createOrderWithOrderAndShipmentConfirmation')
+const createOrderAndApplyDiscount = require('./router/order/postApi/createOrderAndApplyDiscount');
+const createOrderWithTaxLines = require('./router/order/postApi/createOrderWithTaxLines');
+const createOrderWithTaxLineBothLineItemsAndOrderRetunrError = require('./router/order/postApi/createOrderWithTaxLineBothLineItemsAndOrderRetunrError');
+
+// Order cancel
+const cancelAnOrder = require('./router/order/postApi/cancelAnOrder');
+const cancelAndRefundOrderUsingAmount = require('./router/order/postApi/cancelAndRefundOrderUsingAmount');
+const cancelAndRefundOrderUsingRefund = require('./router/order/postApi/cancelAndRefundOrderUsingRefund');
+const cancelOrderThatIsPaidAndFullfillmentReturnError = require('./router/order/postApi/cancelOrderThatIsPaidAndFullfillmentReturnError')
+
+//Order close
+const closeAnOrder = require('./router/order/postApi/closeAnOrder');
+
+//Order re-open
+const reOpenAClosedOrder = require('./router/order/postApi/reOpenAClosedOrder');
+
+//Order update
+const addMetafieldsToAnOrder = require('./router/order/updateApi/addMetafieldsToAnOrder');
+const addNoteToOrder = require('./router/order/updateApi/addNoteToOrder');
+const addNoteAttributeToOrder = require('./router/order/updateApi/addNoteAttributeToOrder');
+const changeOrdersEmail = require('./router/order/updateApi/changeOrdersEmail');
+const changeOrdersPhone = require('./router/order/updateApi/changeOrdersPhone');
+const changeCustomerAcceptsMarketing = require('./router/order/updateApi/changeCustomerAcceptsMarketing');
+const removeCustomerFromAnOrder = require('./router/order/updateApi/removeCustomerFromAnOrder');
+const updateOrdersTags = require('./router/order/updateApi/updateOrdersTags');
+const updateShippingAddressOfOrder = require('./router/order/updateApi/updateShippingAddressOfOrder');
+
+//Order delete
+const deleteOrder = require('./router/order/deleteApi/deleteOrder');
 
 //Product get
 const productList = require('./router/product/getApi/list/productList');
@@ -184,8 +219,43 @@ app.use('/api',getSpecificOrderWithCertainFields);
 app.use('/api',getCountOfOrders);
 app.use('/api',getCountOfAuthorizedPaymentOrder);
 
-//Order post Api
+//Order create Api
 app.use('/api',createAnOrder);
+app.use('/api',createPartiallyPaidOrderWithNewCustomer);
+app.use('/api',createPendingOrderWithExistingCustomer);
+app.use('/api',createSimpleOrderWithFullfillment);
+app.use('/api',createOrderWithOnlyVariantId);
+app.use('/api',createOrderWithoutOrderAndFullfillmentReciept);
+app.use('/api',createOrderWithOrderAndShipmentConfirmation);
+app.use('/api',createOrderAndApplyDiscount);
+app.use('/api',createOrderWithTaxLines);
+app.use('/api',createOrderWithTaxLineBothLineItemsAndOrderRetunrError);
+
+//Order cancel api
+app.use('/api',cancelAnOrder);
+app.use('/api',cancelAndRefundOrderUsingAmount);
+app.use('/api',cancelAndRefundOrderUsingRefund);
+app.use('/api',cancelOrderThatIsPaidAndFullfillmentReturnError);
+
+//Order close api
+app.use('/api',closeAnOrder);
+
+//Order open api
+app.use('/api',reOpenAClosedOrder);
+
+//Order update api
+app.use('/api',addMetafieldsToAnOrder);
+app.use('/api',addNoteToOrder);
+app.use('/api',addNoteAttributeToOrder);
+app.use('/api',changeOrdersEmail);
+app.use('/api',changeOrdersPhone);
+app.use('/api',changeCustomerAcceptsMarketing);
+app.use('/api',removeCustomerFromAnOrder);
+app.use('/api',updateOrdersTags);
+app.use('/api',updateShippingAddressOfOrder);
+
+//Order delete api
+app.use('/api',deleteOrder);
 
 //Product get api
 app.use('/api',productList);

@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
 
-router.post('/createAnOrder',async (req,res) => {
-    const {line_items, transactions, total_tax, currency} = req.body;
-    if(!line_items || !transactions || !total_tax || !currency){
+router.post('/createOrderWithOnlyVariantId',async (req,res) => {
+    const {line_items} = req.body;
+    if(!line_items){
         return res.status(422).send({ status:'error', message: 'Unprocessable Entity'})
     }
     try{
@@ -14,15 +14,12 @@ router.post('/createAnOrder',async (req,res) => {
             apiVersion: process.env.APIVERSION
         });
         const obj = {
-            line_items,
-            transactions,
-            total_tax,
-            currency
+            line_items
         }
 
-        let getOrder = await shopifyStore.order.create(obj);
+        const createOrder = await shopifyStore.order.create(obj);
 
-        return res.status(200).send({status: "Success", message: 'Order created successfully', order: getOrder });
+        return res.status(200).send({status: "Success", message: 'Order created successfully', createOrder: createOrder });
     } catch(error) {
         console.log(error);
         return res.status(500).send({ message: 'Internal Server Error' });
