@@ -142,11 +142,38 @@ const updateTitle = require('./router/product/updateApi/updateTitle');
 //Product delete
 const deleteProduct = require('./router/product/deleteApi/deleteProduct');
 
-//Discont
-const getDiscontCodeList = require('./router/discount/getDiscountList');
-const createDiscountCode = require('./router/discount/createDiscountCode');
-const updateDiscountCode = require('./router/discount/updateDiscountCode');
-const deleteDiscountCode = require('./router/discount/deleteDiscountCode');
+//Discont create
+const createDiscountCodeCreationJob = require('./router/discountCode/postApi/createDiscountCodeCreationJob')
+const createDiscountCode = require('./router/discountCode/postApi/createDiscountCode');
+
+//Discount get
+const getLocationOfDiscountCode = require('./router/discountCode/getApi/getLocationOfDiscountCode');
+const getListOfDiscountCode = require('./router/discountCode/getApi/getListOfDiscountCode');
+const getSingalDiscountCode = require('./router/discountCode/getApi/getSingalDiscountCode');
+
+//Discount update
+const updateDiscountCode = require('./router/discountCode/updateApi/updateDiscountCode');
+
+//Discount delete
+const deleteDiscountCode = require('./router/discountCode/deleteApi/deleteDiscountCode');
+
+//Price rule get
+const getlistOfPriceRule = require('./router/priceRule/getApi/getListOfPriceRule');
+const getPriceRuleAfterSpecificId = require('./router/priceRule/getApi/getPriceRuleAfterSpecificId');
+const getSingalPriceRule = require('./router/priceRule/getApi/getSingalPriceRule');
+
+//Price rule create
+const createBuyXGetYPriceRule = require('./router/priceRule/postApi/createBuyXGetYPriceRule');
+const createPriceRuleThatGivesTheBuyerAmountOfAnOrder = require('./router/priceRule/postApi/createPriceRuleThatGivesTheBuyerAmountOfAnOrder');
+const createPriceRuleThatGivesTheBuyer15PercentOff = require('./router/priceRule/postApi/createPriceRuleThatGivesTheBuyer15PercentOfSpecificCollection');
+const createPriceRuleThatHaveGivesBuyerFreeShipping = require('./router/priceRule/postApi/createPriceRuleThatHaveGivesBuyerFreeShipping');
+
+//Price rule update
+const updateTitleOfPriceRule = require('./router/priceRule/updateApi/updateTitleOfPriceRule');
+
+//Price rule delete
+const deletePriceRule = require('./router/priceRule/deleteApi/deletePriceRule');
+
 const app = express();
 app.use(express.json());
 
@@ -298,12 +325,37 @@ app.use('/api',updateTitle);
 //Product delete api
 app.use('/api',deleteProduct);
 
-//discount api
-app.use('/api',getDiscontCodeList);
+//discount create api
+app.use('/api',createDiscountCodeCreationJob);
 app.use('/api',createDiscountCode);
+
+//discount get api
+app.use('/api',getLocationOfDiscountCode);
+app.use('/api',getListOfDiscountCode);
+app.use('/api',getSingalDiscountCode);
+
+//discount update api
 app.use('/api',updateDiscountCode);
+
+//discount delete api
 app.use('/api',deleteDiscountCode);
 
+//price rule get api
+app.use('/api',getlistOfPriceRule);
+app.use('/api',getPriceRuleAfterSpecificId);
+app.use('/api',getSingalPriceRule);
+
+//price rule create api
+app.use('/api',createBuyXGetYPriceRule);
+app.use('/api',createPriceRuleThatGivesTheBuyerAmountOfAnOrder);
+app.use('/api',createPriceRuleThatGivesTheBuyer15PercentOff);
+app.use('/api',createPriceRuleThatHaveGivesBuyerFreeShipping);
+
+//price rule update api
+app.use('/api',updateTitleOfPriceRule);
+
+// price rule delete api
+app.use('/api',deletePriceRule);
 
 //Server
 app.listen(8081, () => {
