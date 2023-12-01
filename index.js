@@ -1,4 +1,5 @@
 const express = require("express");
+require('./database/connect').connect();                           
 
 //shop-detail
 const country = require('./router/shop_detail/country');
@@ -173,6 +174,21 @@ const updateTitleOfPriceRule = require('./router/priceRule/updateApi/updateTitle
 
 //Price rule delete
 const deletePriceRule = require('./router/priceRule/deleteApi/deletePriceRule');
+
+//Webhooks get
+const getListOfWebhook = require('./router/webhook/getApi/getListOfWebhook');
+const getWebhookAfterId = require('./router/webhook/getApi/getWebhookAfterId');
+const getSingalWebhook = require('./router/webhook/getApi/getSingalWebhook');
+const countOfAllWebhooks = require('./router/webhook/getApi/countOfAllWebhooks');
+const countOfWebhooksForTopic = require('./router/webhook/getApi/countOfWebhooksForTopic');
+
+//Webhook post
+const webhookForCreateCustomer = require('./router/webhook/postApi/webhookForCreateCustomer');
+const webhookForCreateOrder = require('./router/webhook/postApi/webhookForCreateOrder');
+const webhookForUpdateCustomer = require('./router/webhook/postApi/webhookForUpdateCustomer');
+
+//Webhook update
+const updateWebhook = require('./router/webhook/updateApi/updateWebhook');
 
 const app = express();
 app.use(express.json());
@@ -356,6 +372,21 @@ app.use('/api',updateTitleOfPriceRule);
 
 // price rule delete api
 app.use('/api',deletePriceRule);
+
+//webhook get api
+app.use('/api',getListOfWebhook);
+app.use('/api',getWebhookAfterId);
+app.use('/api',getSingalWebhook);
+app.use('/api',countOfAllWebhooks);
+app.use('/api',countOfWebhooksForTopic);
+
+//webhook post api
+app.use('/api',webhookForCreateCustomer);
+app.use('/api',webhookForCreateOrder);
+app.use('/api',webhookForUpdateCustomer);
+
+//webhook update api
+app.use('/api',updateWebhook);
 
 //Server
 app.listen(8081, () => {
