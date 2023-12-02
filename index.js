@@ -54,7 +54,7 @@ const updateCustomerThatNotExistRetunsError = require('./router/customer/updateA
 const deleteCustomer = require('./router/customer/deleteApi/deleteCustomer');
 
 
-//Order get
+//Order getc
 const getOrder = require('./router/order/getApi/getAllOrders');
 const getAllOrdersAfterSpecificId = require('./router/order/getApi/getAllOrderAfterSpecificId')
 const getAllOrdersWithCertaindFields = require('./router/order/getApi/getAllOrdersWithCertainFields');
@@ -182,10 +182,16 @@ const getSingalWebhook = require('./router/webhook/getApi/getSingalWebhook');
 const countOfAllWebhooks = require('./router/webhook/getApi/countOfAllWebhooks');
 const countOfWebhooksForTopic = require('./router/webhook/getApi/countOfWebhooksForTopic');
 
-//Webhook post
-const webhookForCreateCustomer = require('./router/webhook/postApi/webhookForCreateCustomer');
-const webhookForCreateOrder = require('./router/webhook/postApi/webhookForCreateOrder');
-const webhookForUpdateCustomer = require('./router/webhook/postApi/webhookForUpdateCustomer');
+//Webhook create
+const webhookForCreateCustomer = require('./router/webhook/postApi/customer/webhookForCreateCustomer');
+const webhookForCreateOrder = require('./router/webhook/postApi/order/webhookForCreateOrder');
+const webhookForUpdateCustomer = require('./router/webhook/postApi/customer/webhookForUpdateCustomer');
+const webhookForCreateProduct = require('./router/webhook/postApi/product/webhookForCreateProduct');
+const webhookForUpdateProduct = require('./router/webhook/postApi/product/webhookForUpdateProduct');
+const webhookForCreateCollection = require('./router/webhook/postApi/collection/webhookForCreateCollection');
+const webhookForUpdateCollection = require('./router/webhook/postApi/collection/webhookForUpdateCollection');
+const webhookForDeleteCollection = require('./router/webhook/postApi/collection/webhookForDeleteCollection');
+const webhookForCustomerDelete = require('./router/webhook/postApi/customer/webhookForCustomerDelete');
 
 //Webhook update
 const updateWebhook = require('./router/webhook/updateApi/updateWebhook');
@@ -384,7 +390,12 @@ app.use('/api',countOfWebhooksForTopic);
 app.use('/api',webhookForCreateCustomer);
 app.use('/api',webhookForCreateOrder);
 app.use('/api',webhookForUpdateCustomer);
-
+app.use('/api',webhookForCreateProduct);
+app.use('/api',webhookForUpdateProduct);
+app.use('/api',webhookForCreateCollection);
+app.use('/api',webhookForUpdateCollection);
+app.use('/api',webhookForDeleteCollection);
+app.use('/api',webhookForCustomerDelete);
 //webhook update api
 app.use('/api',updateWebhook);
 

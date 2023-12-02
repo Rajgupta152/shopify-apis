@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
-const schema = require("../../../model/customerSchema");
+const schema = require("../../../../model/customerSchema");
 const { ObjectId } = require("mongoose").Types;
 require("dotenv").config();
 

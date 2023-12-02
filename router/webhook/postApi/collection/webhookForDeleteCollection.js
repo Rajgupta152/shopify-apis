@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
-const orderSchema = require('../../../model/orderSchema')
+const schema = require('../../../../model/collectionSchema');
 require("dotenv").config();
 
-router.post('/webhookForCreateOrder',async (req,resp) => {
+router.post('/webhookForDeleteCollection',async (req,resp) => {
     try{
         const shopifyStore = new shopify({
             shopName: process.env.SHOPNAME,
@@ -13,8 +13,8 @@ router.post('/webhookForCreateOrder',async (req,resp) => {
         });
 
         let _webhook = {
-            topic: "orders/create",
-            address: `https://8bce-2401-4900-1c09-9072-3942-c3e4-c10e-8fab.ngrok-free.app/api/createOrder`,
+            topic: "collections/delete",
+            address: `https://82b0-2401-4900-1c09-9072-ac2a-e1cc-f334-69a7.ngrok-free.app/api/deleteCollection`,
             format: "json",
           };
 
@@ -27,25 +27,16 @@ router.post('/webhookForCreateOrder',async (req,resp) => {
     }
 })
 
-router.post('/createOrder', async (req,res) => {
+router.post('/deleteCollection', async(req,res) => {
     try{
+        const id = req.body.id;
+        await schema.findOneAndDelete(id);
 
-        const order = new orderSchema({
-            id: req.body.id,
-            total_price: req.body.total_price,
-            email: req.body.email,
-            phone: req.body.phone,
-            billing_address: req.body.billing_address,
-            created_at: req.body.created_at
-        })
-
-        order.save();
-
-        console.log(req)
-        res.status(200).send({status: 'Success', notification: 'Order created',order: order});
+        console.log(req);
+        res.status(200).send({status: 'Success', message: 'collection deleted'})
     } catch(err){
         console.log(err);
-        res.status(500).send({message: 'Internal server error'});
+        res.status(500).send({error: 'Internal server error'});
     }
 })
 

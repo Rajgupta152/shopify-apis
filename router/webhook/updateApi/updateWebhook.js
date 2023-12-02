@@ -17,9 +17,9 @@ router.put('/updateWebhook/:id',async (req,res) => {
             apiVersion: process.env.APIVERSION
         });
 
-        let countWebhook = await shopifyStore.webhook.update({id: id});
+        let updatedWebhook = await shopifyStore.webhook.update(id,{address: address});
 
-        return res.status(200).send({status: 'Success', message: 'Count of webhooks retrieved successfully', count: countWebhook });
+        return res.status(200).send({status: 'Success', message: 'Webhooks updated successfully', updatedWebhook: updatedWebhook });
     } catch(error) {
         console.log(error);
         return res.status(500).send({ message: 'Internal Server Error' });

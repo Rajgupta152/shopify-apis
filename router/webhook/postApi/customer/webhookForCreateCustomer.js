@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const shopify = require("shopify-api-node");
-const schema = require('../../../model/customerSchema');
+const schema = require('../../../../model/customerSchema');
 require("dotenv").config();
 
 router.post('/webhookForCreateCustomer',async (req,resp) => {
@@ -14,7 +14,7 @@ router.post('/webhookForCreateCustomer',async (req,resp) => {
 
         let _webhook = {
             topic: "customers/create",
-            address: `https://8bce-2401-4900-1c09-9072-3942-c3e4-c10e-8fab.ngrok-free.app/api/customerCreate`,
+            address: `https://82b0-2401-4900-1c09-9072-ac2a-e1cc-f334-69a7.ngrok-free.app/api/customerCreate`,
             format: "json",
           };
 
