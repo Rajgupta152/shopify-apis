@@ -15,7 +15,7 @@ router.post('/webhookForUpdateCollection',async (req,resp) => {
     try{
         let _webhook = {
             topic: "collections/update",
-            address: `https://82b0-2401-4900-1c09-9072-ac2a-e1cc-f334-69a7.ngrok-free.app/api/updateCollection`,
+            address: `https://c110-2401-4900-1ca2-ba86-7179-4374-5de7-2b09.ngrok-free.app/api/updateCollection`,
             format: "json",
           };
 
@@ -42,17 +42,19 @@ router.post('/updateCollection', async(req,res) => {
         
         console.log('id',id);
         let getCollectionProducts = await shopifyStore.collection.products(id);
-        // const product =  new collectionsProductSchema({
-        //     id: getCollectionProducts.id,
-        //     title: getCollectionProducts.title,
-        //     vendor: getCollectionProducts.vendor,
-        //     product_type: getCollectionProducts.product_type,
-        //     created_at: getCollectionProducts.created_at,
-        //     status: getCollectionProducts.status
-        // })
-        // console.log('product',product)
-
-        // product.save();
+        getCollectionProducts.map((item) => {
+            const product =  new collectionsProductSchema({
+                id: item.id,
+                title: item.title,
+                vendor: item.vendor,
+                product_type: item.product_type,
+                created_at: item.created_at,
+                status: item.status
+            })
+            console.log('product',product)
+    
+            product.save();
+        })
 
 
         console.log('collection product',getCollectionProducts);

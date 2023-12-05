@@ -14,7 +14,7 @@ router.post('/webhookForDeleteCollection',async (req,resp) => {
 
         let _webhook = {
             topic: "collections/delete",
-            address: `https://82b0-2401-4900-1c09-9072-ac2a-e1cc-f334-69a7.ngrok-free.app/api/deleteCollection`,
+            address: `https://c110-2401-4900-1ca2-ba86-7179-4374-5de7-2b09.ngrok-free.app/api/deleteCollection`,
             format: "json",
           };
 
@@ -29,10 +29,10 @@ router.post('/webhookForDeleteCollection',async (req,resp) => {
 
 router.post('/deleteCollection', async(req,res) => {
     try{
-        const id = req.body.id;
+        const {id} = req.body;
         await schema.findOneAndDelete(id);
 
-        console.log(req);
+        console.log(req.body);
         res.status(200).send({status: 'Success', message: 'collection deleted'})
     } catch(err){
         console.log(err);

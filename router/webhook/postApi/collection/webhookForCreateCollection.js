@@ -15,7 +15,7 @@ router.post('/webhookForCreateCollection',async (req,resp) => {
 
         let _webhook = {
             topic: "collections/create",
-            address: `https://82b0-2401-4900-1c09-9072-ac2a-e1cc-f334-69a7.ngrok-free.app/api/createCollection`,
+            address: `https://c110-2401-4900-1ca2-ba86-7179-4374-5de7-2b09.ngrok-free.app/api/createCollection`,
             format: "json",
           };
 
